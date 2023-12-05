@@ -1,0 +1,56 @@
+﻿@model List<ContatoModel>
+@{
+    ViewData["Title"] = "Lista de Contatos";
+}
+
+
+    
+    <table class="table" id="Table-Contatos">
+        <h1 class="display-4">Meus Contatos</h1>
+        <thead>
+            <tr>
+                <th scope="col"> ID </th>
+                <th scope="col"> Nome </th>
+                <th scope="col"> E-Mail </th>
+                <th scope="col"> Celular </th>
+                <th scope="col"><a asp-controller="Contato" asp-action="Criar" type="button" class="btn btn-primary">adicionar contato</a></th>
+            </tr>
+        </thead>
+
+        @if(TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="btn btn-danger bnt-SM close-alert" arial-label="close">X</button>
+                @TempData["MensagemSucesso"]
+            </div>
+        }
+        @if(TempData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="btn btn-danger bnt-SM close-alert" arial-label="close">X</button>
+                @TempData["MensagemErro"]
+            </div>
+        }
+        <br />
+        <tbody>
+            @if(Model != null && Model.Any())
+            {
+                foreach(ContatoModel contato in Model)
+                {
+                    <tr>
+                        <th scope="row">@contato.Id</th>
+                        <td>@contato.nome</td>
+                        <td>@contato.email</td>
+                        <td>@contato.celular</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@contato.Id"  asp-controller="Contato" asp-action="Excluir">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+

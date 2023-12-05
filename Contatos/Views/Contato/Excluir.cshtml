@@ -1,0 +1,12 @@
+﻿@model ContatoModel
+@{
+    ViewData["Title"] = "Lista de Contatos";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Tem certeza que deseja EXCLUIR "@Model.nome" ?</h1><br /><br />
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a role="button" class="btn btn-danger" asp-controller="Contato" asp-route-id="@Model.Id"  asp-action="Apagar">EXCLUIR</a>
+        <a role="button"  class="btn btn-primary"  asp-controller="Contato"  asp-action="Index">CANCELAR</a>
+    </div>
+</div>
